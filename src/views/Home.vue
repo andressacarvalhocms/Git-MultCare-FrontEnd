@@ -81,6 +81,7 @@ import BaseContentTitle from '@/components/BaseContentTitle.vue';
 import DashboardCard from '@/components/DashboardCard.vue';
 import Exame from '../services/exame';
 import Analise from '../services/analise';
+import QuestionarioCovid from '../services/questionarioCovid';
 
 export default {
 

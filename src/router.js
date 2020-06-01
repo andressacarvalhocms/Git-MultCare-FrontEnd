@@ -9,6 +9,8 @@ import Auth from './views/Auth.vue';
 import Register from './views/Register.vue';
 import Monitoramento from './views/Monitoramento.vue';
 import Classificacao from './views/Classificacao.vue';
+
+import QuestionarioCovid from './views/QuestionarioCovid.vue';
 import auth from './middlewares/auth';
 
 Vue.use(Router);
@@ -82,6 +84,11 @@ const router = new Router({
       path: '/classificacao',
       name: 'classificacao',
       component: Classificacao
+    },
+    {
+      path: '/questionarioCovid',
+      name: 'questionarioCovid',
+      component: QuestionarioCovid
     }
   ]
 });
