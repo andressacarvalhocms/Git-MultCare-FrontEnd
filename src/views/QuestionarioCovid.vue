@@ -92,7 +92,19 @@
                 label="Você está tendo algum desses sintomas ou sinais abaixo (marque os que se aplicarem ao seu caso)?"
                 label-for="inp-sintomas"
                 >
-                <select class="form-control" id="inp-nome" v-model="questionarioCovid.sintomas" 
+              <div id="checkboxes">
+                  <input type="checkbox" id="Tosse seca" value="Tosse seca" v-model="questionarioCovid.sintomas" />
+                  <label>Tosse seca</label>
+
+                  <input type="checkbox" id="Dor muscular" value="Dor muscular" v-model="questionarioCovid.sintomas" />
+                  <label>Dor muscular</label>
+                  
+                  <input type="checkbox" id="Dor de cabeça" value="Dor de cabeça" v-model="questionarioCovid.sintomas" />
+                  <label>Dor de cabeça</label>
+              </div>
+
+
+               <!-- <select class="form-control" id="inp-nome" v-model="questionarioCovid.sintomas" 
                         :options="form.nome_options"
                         required
                         @input="onChangeExame">
@@ -111,7 +123,7 @@
                     <option value="Mal estar ">Mal estar </option>
                     <option value="Nenhum desses sintomas  ">Nenhum desses sintomas  </option>
                 </select>
-                <span>Selecionados: {{ selected }}</span>
+-->
         </b-form-group>
 
         
@@ -293,6 +305,7 @@ export default {
     BaseLayout,
     BaseContentTitle
   },
+  
   data() {
     return {
 
@@ -300,7 +313,7 @@ export default {
           id: '',
           sexo: '',
           temperatura: '',
-          sintomas: '',
+          sintomas: [],
           qtdDiasSintomas: '', 
           progressaoSintomas: '', 
           sintomasAdicionais: '', 
@@ -333,6 +346,7 @@ export default {
       }
     };
   },
+  
   methods: {
     listar(){
       QuestionarioCovid.listar().then(resposta => {

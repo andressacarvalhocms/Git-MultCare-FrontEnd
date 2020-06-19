@@ -8,6 +8,7 @@ import Historico from './views/Historico.vue';
 import Auth from './views/Auth.vue';
 import Register from './views/Register.vue';
 import Monitoramento from './views/Monitoramento.vue';
+import MonitoramentoDiabetes from './views/MonitoramentoDiabetes.vue';
 import Classificacao from './views/Classificacao.vue';
 
 import QuestionarioCovid from './views/QuestionarioCovid.vue';
@@ -79,6 +80,11 @@ const router = new Router({
       path: '/monitoramento',
       name: 'monitoramento',
       component: Monitoramento
+    },
+    {
+      path: '/monitoramentoDiabetes',
+      name: 'monitoramentoDiabetes',
+      component: MonitoramentoDiabetes
     },
     {
       path: '/classificacao',
