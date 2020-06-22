@@ -1,8 +1,8 @@
 import { http } from './config';
 
 export default {
-  realizarAnalise: () => {
-    return http.get('analise/realizarMonitoramento');
+  realizarAnalise: (monitoramento) => {
+    return http.post('monitoramento/realizar', monitoramento);
   },
   obterAnalises: () => {
     return http.get('analise/obter-analises');

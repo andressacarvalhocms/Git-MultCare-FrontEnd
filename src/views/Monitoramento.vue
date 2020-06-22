@@ -8,7 +8,7 @@
           v-b-modal="'modal-analise'"
           size="sm"
           variant="outline-secondary"
-        > 
+        >
           Realizar nova análise
         </b-button> -->
       </template>
@@ -17,8 +17,8 @@
              @dismissed="msgAlert = ''">
       {{msgAlert}}
     </b-alert>
-   
-    
+
+
       <form
         ref="form"
         @submit.prevent="salvar"
@@ -55,16 +55,16 @@
                  required class="form-control">
         </b-form-group>
 
-        <button  
+        <button
             v-b-modal="'modal-analise'"
             size="sm"
             variant="outline-secondary"
-            type="submit" class="btn btn-primary" style="margin: 0 15px;"> 
+            type="submit" class="btn btn-primary" style="margin: 0 15px;">
           Confirmar
         </button>
 
       </form>
-      
+
     <b-modal
       id="modal-analise"
       size="sm"
@@ -121,7 +121,7 @@ export default {
       form: {
         exame: null,
         valor: ''
-        
+
       }
     };
   },
@@ -132,41 +132,43 @@ export default {
     startAnalise(evt) {
       this.msgAlert = '';
       this.showDismissibleAlert = false;
-      Analise.realizarAnalise().then(resposta => {
-        this.msgAlert = 'Resultado da Análise: ' + resposta.data.classificacao;
+      Analise.realizarAnalise(this.exame).then(resposta => {
+        this.msgAlert = 'Resultado da Análise: ' + resposta.data;
       });
       setTimeout(() => {
         this.$bvModal.hide('modal-analise');
         this.showDismissibleAlert = true;
       }, 2000);
     },
-    
+
     listar() {
       Exame.listar().then(resposta => this.exames = resposta.data);
     },
 
     salvar() {
-      if (!this.exame.id) {
-        Exame.salvar(this.exame).then(resposta => {
-          this.exame = {};
-          alert('Salvo com sucesso!');
-          window.location.reload();
-          this.listar();
-          this.errors = [];
-        }).catch(e => {
-          this.errors = e.response.data.errors;
-        });
-      } else {
-        Exame.salvar(this.exame).then(resposta => {
-          this.exame = {};
-          alert('Atualizado com sucesso!');
-          window.location.reload();
-          this.listar();
-          this.errors = [];
-        }).catch(e => {
-          this.errors = e.response.data.errors;
-        });
-      }
+
+
+      // if (!this.exame.id) {
+      //   Exame.salvar(this.exame).then(resposta => {
+      //     this.exame = {};
+      //     alert('Salvo com sucesso!');
+      //     window.location.reload();
+      //     this.listar();
+      //     this.errors = [];
+      //   }).catch(e => {
+      //     this.errors = e.response.data.errors;
+      //   });
+      // } else {
+      //   Exame.salvar(this.exame).then(resposta => {
+      //     this.exame = {};
+      //     alert('Atualizado com sucesso!');
+      //     window.location.reload();
+      //     this.listar();
+      //     this.errors = [];
+      //   }).catch(e => {
+      //     this.errors = e.response.data.errors;
+      //   });
+      // }
     },
 
     editar(exame) {
