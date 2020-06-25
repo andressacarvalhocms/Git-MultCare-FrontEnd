@@ -1,17 +1,17 @@
 <template>
   <BaseLayout activemenu="">
-    <BaseContentTitle icon="clipboard-list">
-      Análise de Risco
+   <!--  <BaseContentTitle icon="clipboard-list">
+    
       <template v-slot:toolbar>
-        <b-button
+       <b-button
           v-b-modal="'modal-analise'"
           size="sm"
           variant="outline-secondary"
         >
-          Realizar nova análise
+          Realizar nova análise 
         </b-button>
       </template>
-    </BaseContentTitle>
+    </BaseContentTitle>-->
     <b-alert v-model="showDismissibleAlert" dismissible
              @dismissed="msgAlert = ''">
       {{msgAlert}}

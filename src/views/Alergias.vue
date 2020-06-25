@@ -3,7 +3,7 @@
     <BaseContentTitle icon="notes-medical">
       Alergias
       <template v-slot:toolbar>
-        <b-button
+        <b-button 
           v-b-modal="'modal-adicionar-alergia'"
           size="sm"
           variant="outline-secondary"
@@ -55,7 +55,7 @@
 
     </div>
 
-    <b-modal
+    <b-modal  hide-footer="true"
       id="modal-adicionar-alergia"
       ref="modal"
       size="md"

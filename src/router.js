@@ -4,6 +4,7 @@ import Home from './views/Home.vue';
 import Medicamentos from './views/Medicamentos.vue';
 import Alergias from './views/Alergias.vue';
 import Exames from './views/Exames.vue';
+import CadastroExames from './views/CadastroExames.vue';
 import Historico from './views/Historico.vue';
 import Auth from './views/Auth.vue';
 import Register from './views/Register.vue';
@@ -38,6 +39,14 @@ const router = new Router({
       path: '/exames',
       name: 'exames',
       component: Exames,
+      meta: {
+        middleware: [auth]
+      }
+    },
+    {
+      path: '/cadastroExames',
+      name: 'cadastroExames',
+      component: CadastroExames,
       meta: {
         middleware: [auth]
       }

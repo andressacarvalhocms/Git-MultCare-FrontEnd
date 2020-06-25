@@ -213,7 +213,7 @@
                 Monitoramento
               </b-nav-item>
             </ul>
-
+<!--
             <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
               <span>Médico responsável</span>
             </h6>
@@ -227,7 +227,7 @@
                   {{ doctor }}
                 </span>
               </li>
-            </ul>
+            </ul> -->
           </div>
         </b-nav>
 

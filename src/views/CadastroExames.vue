@@ -4,65 +4,18 @@
     <BaseContentTitle icon="stethoscope">
       Exames
       <template v-slot:toolbar>
-        <b-button
-          v-b-modal="'modal-adicionar-exame'"
-          size="sm"
-          variant="outline-secondary"
-        >
-          <font-awesome-icon icon="plus" /> Adicionar exame
-        </b-button>
+       
       </template>
     </BaseContentTitle>
 
-    <div class="table-responsive">
-
-    <table class="table striped">
-      <thead class="thead-light">
-        <tr>
-          <th scope="col">Id</th>
-          <th scope="col">Nome</th>
-          <th scope="col">Resultado</th>
-          <th scope="col">Data Cadastro</th>
-          <th scope="col">Opções</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="exame of exames" :key="exame.id">
-          <td>{{ exame.id}} </td>
-          <td>{{ exame.nome}} </td>
-          <td>{{ exame.resultado }}</td>
-          <td>{{ exame.dataCadastro }}</td>
-          <td>
-              <b-button
-                v-b-modal="'modal-adicionar-exame'"
-                size="sm"
-                variant="outline-secondary"
-                @click="editar(exame)"
-              >
-                <i class='fas fa-pen'></i>
-              </b-button>
-
-              <b-button
-                size="sm"
-                variant="outline-secondary"
-                @click="remover(exame)"
-              >
-                <i class='fas fa-trash'></i>
-              </b-button>
-          </td>
-        </tr>
-      </tbody>
-</table>
-    </div>
-    <b-modal
-      hide-footer="true"
+  <!--  <b-modal
       id="modal-adicionar-exame"
       ref="modal"
       size="md"
       title="Exame"
       @show="resetModal"
       @ok="handleSave"
-    > 
+    > -->
       <form
         ref="form"
         @submit.prevent="salvar"
@@ -75,14 +28,18 @@
                   :options="form.nome_options"
                   required
                   @input="onChangeExame">
-           <option value="creatinina">Creatinina, und_medida: 'mg/dL'</option>
+            <option value="Pressão Arterial">Pressão Arterial, und_medida: 'mmHg' </option>
+            <option value="creatinina">Creatinina, und_medida: 'mg/dL'</option>
             <option value="Uréia">Uréia, und_medida: 'mg/dL' </option>
             <option value="Albuminúria">Albuminúria, und_medida: 'mg/dL' </option>
             <option value="Albumina">Albumina, und_medida: 'mg/dL' </option>
             <option value="Potássio">Potássio, und_medida: 'mEq/L'</option>
             <option value="TFG">TFG, und_medida: 'mL/min/1,73 m²'</option>
             <option value="Microalbuminúria">Microalbuminúria, und_medida: 'mmHg'</option>
-         </select>
+            <option value="Glicemia de jejum">Glicemia de jejum, und_medida: 'mg/dL'</option>
+            <option value="Glicemia pré-prandial">Glicemia pré-prandial, und_medida: 'mg/dL'</option>
+            <option value="Glicemia pós-prandial">Glicemia pós-prandial, und_medida: 'mg/dL'</option>
+          </select>
         </b-form-group>
 
         <b-form-group
@@ -104,9 +61,10 @@
 
         <button type="submit" class="btn btn-primary" style="margin: 0 15px;"> Confirmar</button>
 
-        <button type="reset" class="btn btn-danger" onClick="window.location.reload()"> Cancelar</button>
+        <b-button href="#/exames" class="btn btn-danger">Voltar</b-button>
+        
       </form>
-    </b-modal> 
+ <!--   </b-modal> -->
   </BaseLayout>
 </template>
 
@@ -181,7 +139,6 @@ export default {
           window.location.reload();
           this.listar();
           this.errors = [];
-          Analise.realizarAnalise(); 
         }).catch(e => {
           this.errors = e.response.data.errors;
         });

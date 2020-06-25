@@ -60,6 +60,7 @@
     </div>
 
     <b-modal
+      hide-footer="true"
       id="modal-adicionar-medicamentos"
       ref="modal"
       size="md"
