@@ -4,15 +4,14 @@ import Home from './views/Home.vue';
 import Medicamentos from './views/Medicamentos.vue';
 import Alergias from './views/Alergias.vue';
 import Exames from './views/Exames.vue';
+import Classificacao from './views/Classificacao.vue';
+import Monitoramento from './views/Monitoramento.vue';
+import QuestionarioTriagem from './views/QuestionarioTriagem.vue';
 import CadastroExames from './views/CadastroExames.vue';
 import Historico from './views/Historico.vue';
 import Auth from './views/Auth.vue';
 import Register from './views/Register.vue';
-import Monitoramento from './views/Monitoramento.vue';
 import MonitoramentoDiabetes from './views/MonitoramentoDiabetes.vue';
-import Classificacao from './views/Classificacao.vue';
-
-import QuestionarioCovid from './views/QuestionarioCovid.vue';
 import auth from './middlewares/auth';
 
 Vue.use(Router);
@@ -88,22 +87,34 @@ const router = new Router({
     {
       path: '/monitoramento',
       name: 'monitoramento',
-      component: Monitoramento
+      component: Monitoramento,
+      meta: {
+        middleware: [auth]
+      }
     },
     {
       path: '/monitoramentoDiabetes',
       name: 'monitoramentoDiabetes',
-      component: MonitoramentoDiabetes
+      component: MonitoramentoDiabetes,
+      meta: {
+        middleware: [auth]
+      }
     },
     {
       path: '/classificacao',
       name: 'classificacao',
-      component: Classificacao
+      component: Classificacao,
+      meta: {
+        middleware: [auth]
+      }
     },
     {
-      path: '/questionarioCovid',
-      name: 'questionarioCovid',
-      component: QuestionarioCovid
+      path: '/questionarioTriagem',
+      name: 'questionarioTriagem',
+      component: QuestionarioTriagem,
+      meta: {
+        middleware: [auth]
+      }
     }
   ]
 });
