@@ -11,6 +11,14 @@
         >
           <font-awesome-icon icon="plus" /> Adicionar exame
         </b-button>
+
+        <b-button
+          v-b-modal="'modal-adicionar-exame-xml'"
+          size="sm"
+          variant="outline-secondary"
+        >
+          <font-awesome-icon icon="plus" /> Adicionar XML Exames
+        </b-button>
       </template>
     </BaseContentTitle>
 
@@ -62,7 +70,7 @@
       title="Exame"
       @show="resetModal"
       @ok="handleSave"
-    > 
+    >
       <form
         ref="form"
         @submit.prevent="salvar"
@@ -106,7 +114,37 @@
 
         <button type="reset" class="btn btn-danger" onClick="window.location.reload()"> Cancelar</button>
       </form>
-    </b-modal> 
+    </b-modal>
+
+
+    <b-modal hide-footer="true"
+             id="modal-adicionar-exame-xml"
+             ref="modal"
+             size="md"
+             title="Selecionar XML Exames"
+    >
+
+      <form
+        ref="form"
+        @submit.prevent="salvarXml">
+
+        <b-form-file
+          v-model="arquivoXml"
+          :state="Boolean(arquivoXml)"
+          placeholder="Selecionar arquivo."
+          drop-placeholder="Solte o arquivo aqui."
+          accept=".xml"
+        ></b-form-file>
+
+        <div class="align-content-center">
+          <button type="submit" class="btn btn-primary" style="margin: 0 15px;"> Confirmar</button>
+
+          <button type="reset" class="btn btn-danger" onClick="window.location.reload()"> Cancelar</button>
+        </div>
+      </form>
+
+    </b-modal>
+
   </BaseLayout>
 </template>
 
@@ -126,6 +164,7 @@ export default {
     BaseContentTitle
   },
   data() {
+    let arquivoXml;
     return {
       exame: {
         id: '',
@@ -134,6 +173,7 @@ export default {
         dataCadastro: ''
       },
       exames: [],
+      arquivoXml,
       form: {
         exame: null,
         valor: '',
@@ -170,7 +210,7 @@ export default {
           window.location.reload();
           this.listar();
           this.errors = [];
-        Analise.realizarAnalise();  
+        Analise.realizarAnalise();
         }).catch(e => {
           this.errors = e.response.data.errors;
         });
@@ -181,13 +221,28 @@ export default {
           window.location.reload();
           this.listar();
           this.errors = [];
-          Analise.realizarAnalise(); 
+          Analise.realizarAnalise();
         }).catch(e => {
           this.errors = e.response.data.errors;
         });
       }
-     
+
     },
+
+    salvarXml() {
+
+          Exame.salvarXml(this.arquivoXml).then( resposta => {
+              this.arquivoXml = undefined;
+              alert('Salvo com sucesso!');
+              window.location.reload();
+              this.listar();
+              this.errors = [];
+              Analise.realizarAnalise();
+          }).catch(e => {
+              console.log(e);
+              this.errors = e.response.data.errors;
+          });
+      },
 
     editar(exame) {
       this.exame = exame;
