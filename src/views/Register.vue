@@ -155,6 +155,38 @@
       />
     </b-form-group>
 
+
+    <b-form-group
+      id="input-group-11"
+      label="Nome do médico:"
+      label-for="input-11"
+    >
+      <b-form-input
+        id="input-11"
+        v-model="nomeMedico"
+        type="text"
+        required
+        autofocus
+        placeholder="Digite o nome do seu médico"
+      />
+    </b-form-group>
+
+    <b-form-group
+      id="input-group-11"
+      label="E-mail do médico:"
+      label-for="input-11"
+    >
+      <b-form-input
+        id="input-11"
+        v-model="emailMedico"
+        type="text"
+        required
+        autofocus
+        placeholder="Digite o email do seu médico"
+      />
+    </b-form-group>
+
+
     <b-form-group>
       <b-button
         variant="primary"
@@ -192,6 +224,8 @@ export default {
     passwordConfirm: '',
     dm: 'F',
     has: 'F',
+    nomeMedico: '',
+    emailMedico:'',
   }),
   methods: {
     onSubmit(evt) {
@@ -207,7 +241,9 @@ export default {
         login: this.username,
         peso: this.weight,
         diabetico: this.dm,
-        hipertenso: this.has
+        hipertenso: this.has,
+        nomeMedico: this.nomeMedico,
+        emailMedico: this.emailMedico
       };
       Usuario.cadastrar(body).then(resposta => {
         alert(resposta.data);
