@@ -170,7 +170,10 @@ export default {
         id: '',
         nome: '',
         resultado: '',
-        dataCadastro: ''
+        dataCadastro: '',
+        classificacao: '',
+        idade: '',
+        pred: ''
       },
       exames: [],
       arquivoXml,
@@ -221,7 +224,13 @@ export default {
           window.location.reload();
           this.listar();
           this.errors = [];
-          Analise.realizarAnalise();
+          Analise.realizarAnalise().then(resp=> console.log(resp));
+          
+              if (resposta.data.classificacao != 'BAIXO RISCO') {
+                Analise.gerarCDA();
+                Analise.enviarEmail();
+              }    
+              
         }).catch(e => {
           this.errors = e.response.data.errors;
         });
@@ -234,14 +243,22 @@ export default {
           Exame.salvarXml(this.arquivoXml).then( resposta => {
               this.arquivoXml = undefined;
               alert('Salvo com sucesso!');
-              window.location.reload();
+            //  window.location.reload();
               this.listar();
               this.errors = [];
-              Analise.realizarAnalise();
+              //Analise.realizarAnalise();
+              Analise.realizarAnalise().then(resp=> {
+          
+              if (resp.data.classificacao != 'BAIXO RISCO') {
+                  Analise.gerarCDA();
+                  Analise.enviarEmail();
+              }
+              }    );
           }).catch(e => {
               console.log(e);
               this.errors = e.response.data.errors;
           });
+          
       },
 
     editar(exame) {

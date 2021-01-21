@@ -1,22 +1,34 @@
 
 <template>
   <BaseLayout activemenu="3">
- <!--   <BaseContentTitle icon="notes-medical">
-      Sistema Especialista
-    </BaseContentTitle>
--->
-<br>
+ <br>
 
+    <b-modal ref="modal-resultado" hide-footer centered title="Resultado da Classificação."
+             :hide-header-close="true"
+             :no-close-on-backdrop="true"
+             :no-close-on-esc="true"
+    >
+      <div class="d-block text-center">
+        <h3>{{this.msgAlert}}</h3>
+      </div>
+        <b-button variant="primary" class="mt-3" block @click="hideModal">Ok</b-button>
+    </b-modal>
 
 <div class="container-fluid tab-pane active  border border-primary" style="padding:30px">
   <h1>Triagem</h1>
+
+  <b-alert v-model="showDismissibleAlert" dismissible
+           @dismissed="msgAlert = ''">
+    {{msgAlert}}
+  </b-alert>
+
   <form
         ref="form"
         @submit.prevent="salvar"
     >
   <ul class="" role="tablist">
     <div class="tab-content" >
-        <div id="sintomas" class="container funkyradio tab-pane ">
+        <div id="sintomas" class="container funkyradio tab-pane active">
         <h6>Quais desses sintomas você está sentindo?</h6>
           <div class="row">
             <div class="col-xs-3 col-sm-3" style="padding-right:10px"><input type="checkbox" name="nauseas" id="trueNauseas" v-model="questionarioTriagem.sintomaTriagem" value="1"> <label for="trueNauseas"> Nauseas</label></div>
@@ -28,11 +40,11 @@
             <div class="col-xs-3 col-sm-3" style="padding-right:10px"><input type="checkbox" name="dorDeCabeca" id="trueDorDeCabeca" v-model="questionarioTriagem.sintomaTriagem" value="5"> <label for="trueDorDeCabeca"> Dor De Cabeca</label></div>
             <div class="col-xs-3 col-sm-3" style="padding-right:10px"><input type="checkbox" name="visaoEmbacada" id="trueVisaoEmbacada" v-model="questionarioTriagem.sintomaTriagem" value="6"> <label for="trueVisaoEmbacada"> Visão Embaçada</label></div>
             <div class="col-xs-3 col-sm-3" style="padding-right:10px"><input type="checkbox" name="bocaSeca" id="trueBocaSeca" v-model="questionarioTriagem.sintomaTriagem" value="7"> <label for="trueBocaSeca"> Boca Seca</label></div>
-            <div class="col-xs-3 col-sm-3" style="padding-right:10px"><input type="checkbox" name="vontadeExcessivaUrinar" id="trueVontadeExcessivaUrinar" v-model="questionarioTriagem.sintomaTriagem" value="8"> <label for="trueVontadeExcessivaUrinar"> Vontade Excessiva de Urinar</label></div>
+            <div class="col-xs-3 col-sm-3" style="padding-right:10px"><input type="checkbox" name="vontadeExcessivaUrinar" id="trueVontadeExcessivaUrinar" v-model="questionarioTriagem.sintomaTriagem" value="8"> <label for="trueVontadeExcessivaUrinar"> Urina Excessiva</label></div>
           </div>
           <div class="row">
             <div class="col-xs-3 col-sm-3" style="padding-right:10px"><input type="checkbox" name="dificuldadeRespirar" id="trueDificuldadeRespirar" v-model="questionarioTriagem.sintomaTriagem" value="9"> <label for="trueDificuldadeRespirar"> Dificuldade de Respirar</label></div>
-            <div class="col-xs-3 col-sm-3" style="padding-right:10px"><input type="checkbox" name="halitoCetonico" id="trueHalitoCetonico" v-model="questionarioTriagem.sintomaTriagem" value="10"> <label for="trueHalitoCetonico"> H0alito Cetônico</label></div>
+            <div class="col-xs-3 col-sm-3" style="padding-right:10px"><input type="checkbox" name="halitoCetonico" id="trueHalitoCetonico" v-model="questionarioTriagem.sintomaTriagem" value="10"> <label for="trueHalitoCetonico"> Hálito Cetônico</label></div>
             <div class="col-xs-3 col-sm-3" style="padding-right:10px"><input type="checkbox" name="sedeExcessiva" id="trueSedeExcessiva" v-model="questionarioTriagem.sintomaTriagem" value="11"> <label for="trueSedeExcessiva"> Sede Excessiva</label></div>
             <div class="col-xs-3 col-sm-3" style="padding-right:10px"><input type="checkbox" name="fraqueza" id="trueFraqueza" v-model="questionarioTriagem.sintomaTriagem" value="12"> <label for="trueFraqueza"> Fraqueza</label></div>
           </div>
@@ -54,10 +66,16 @@
             <div class="col-xs-3 col-sm-3" style="padding-right:10px"><input type="checkbox" name="paralisia" id="trueParalisia" v-model="questionarioTriagem.sintomaTriagem" value="23"> <label for="trueParalisia"> Paralisia</label></div>
             <div class="col-xs-3 col-sm-3" style="padding-right:10px"><input type="checkbox" name="constipacao" id="trueConstipacao" v-model="questionarioTriagem.sintomaTriagem" value="24"> <label for="trueConstipacao"> Constipação</label></div>
           </div>
-          
+          <div class="row">
+            <div class="col-xs-3 col-sm-3" style="padding-right:10px"><input type="checkbox" name="dormencia" id="truedormencia" v-model="questionarioTriagem.sintomaTriagem" value="26"> <label for="truedormencia"> Dormencia</label></div>
+            <div class="col-xs-3 col-sm-3" style="padding-right:10px"><input type="checkbox" name="Vomito" id="trueVômito" v-model="questionarioTriagem.sintomaTriagem" value="27"> <label for="trueVômito"> Vômito</label></div>
+            <div class="col-xs-3 col-sm-3" style="padding-right:10px"><input type="checkbox" name="dorNoPeito" id="truedorNoPeito" v-model="questionarioTriagem.sintomaTriagem" value="28"> <label for="truedorNoPeito"> Dor no peito</label></div>
+            <div class="col-xs-3 col-sm-3" style="padding-right:10px"><input type="checkbox" name="caimbra" id="truecaimbra" v-model="questionarioTriagem.sintomaTriagem" value="25"> <label for="truecaimbra"> Cãimbra</label></div>
+          </div>
+
                 <li >
                     <button type="button" class="btn btn-primary" style="margin: 0 15px;" data-toggle="pill" href="#medicamentoTriagem"> Próximo</button>
-   
+
                 </li>
         </div>
       <div id="medicamentoTriagem" class="funkyradio container tab-pane fade"><br>
@@ -74,7 +92,7 @@
             <div class="col-xs-3 col-sm-3" style="padding-right:10px"><input type="checkbox" name="Pentamidina" id="Pentamidina" v-model="questionarioTriagem.medicamentoTriagem" value="7"> <label for="Pentamidina"> Pentamidina</label></div>
             <div class="col-xs-3 col-sm-3" style="padding-right:10px"><input type="checkbox" name="InibidoresDaProtease" id="trueInibidoresDaProtease" v-model="questionarioTriagem.medicamentoTriagem" value="8"> <label for="trueInibidoresDaProtease"> InibidoresDaProtease</label></div>
           </div>
-        
+
           <div class="row">
             <div class="col-xs-3 col-sm-3" style="padding-right:10px"><input type="checkbox" name="LAsparaginase" id="LAsparaginase" v-model="questionarioTriagem.medicamentoTriagem" value="9"> <label for="LAsparaginase"> LAsparaginase</label></div>
             <div class="col-xs-3 col-sm-3" style="padding-right:10px"><input type="checkbox" name="Antipsicoticos" id="Antipsicoticos" v-model="questionarioTriagem.medicamentoTriagem" value="10"> <label for="Antipsicoticos"> Antipsicoticos</label></div>
@@ -87,7 +105,7 @@
             <div class="col-xs-3 col-sm-3" style="padding-right:10px"><input type="checkbox" name="Pravastatina" id="Pravastatina" v-model="questionarioTriagem.medicamentoTriagem" value="15"> <label for="Pravastatina"> Pravastatina</label></div>
             <div class="col-xs-3 col-sm-3" style="padding-right:10px"><input type="checkbox" name="Glibenclamida" id="Glibenclamida" v-model="questionarioTriagem.medicamentoTriagem" value="16"> <label for="Glibenclamida"> Glibenclamida</label></div>
           </div>
-        
+
           <div class="row">
             <div class="col-xs-3 col-sm-3" style="padding-right:10px"><input type="checkbox" name="Glipizida" id="Glipizida" v-model="questionarioTriagem.medicamentoTriagem" value="18"> <label for="Glipizida"> Glipizida</label></div>
             <div class="col-xs-3 col-sm-3" style="padding-right:10px"><input type="checkbox" name="Clorpropamida" id="Clorpropamida" v-model="questionarioTriagem.medicamentoTriagem" value="19"> <label for="Clorpropamida"> Clorpropamida</label></div>
@@ -100,7 +118,7 @@
             <div class="col-xs-3 col-sm-3" style="padding-right:10px"><input type="checkbox" name="Pioglitazona" id="Pioglitazona" v-model="questionarioTriagem.medicamentoTriagem" value="24"> <label for="Pioglitazona"> Pioglitazona</label></div>
             <div class="col-xs-3 col-sm-3" style="padding-right:10px"><input type="checkbox" name="Sitagliptina" id="Sitagliptina" v-model="questionarioTriagem.medicamentoTriagem" value="25"> <label for="Sitagliptina"> Sitagliptina</label></div>
           </div>
-        
+
           <div class="row">
             <div class="col-xs-3 col-sm-3" style="padding-right:10px"><input type="checkbox" name="Vildagliptina" id="Vildagliptina" v-model="questionarioTriagem.medicamentoTriagem" value="26"> <label for="Vildagliptina"> Vildagliptina</label></div>
             <div class="col-xs-3 col-sm-3" style="padding-right:10px"><input type="checkbox" name="Saxagliptina" id="Saxagliptina" v-model="questionarioTriagem.medicamentoTriagem" value="27"> <label for="Saxagliptina"> Saxagliptina</label></div>
@@ -113,7 +131,7 @@
             <div class="col-xs-3 col-sm-3" style="padding-right:10px"><input type="checkbox" name="Triantereno" id="Triantereno" v-model="questionarioTriagem.medicamentoTriagem" value="32"> <label for="Triantereno"> Triantereno</label></div>
             <div class="col-xs-3 col-sm-3" style="padding-right:10px"><input type="checkbox" name="InibidoresDoECA" id="InibidoresDoECA" v-model="questionarioTriagem.medicamentoTriagem" value="33"> <label for="InibidoresDoECA"> InibidoresDoECA</label></div>
           </div>
-        
+
           <div class="row">
             <div class="col-xs-3 col-sm-3" style="padding-right:10px"><input type="checkbox" name="AntagonistaDosReceptoresDaAngiotensina" id="AntagonistaDosReceptoresDaAngiotensina" v-model="questionarioTriagem.medicamentoTriagem" value="34"> <label for="AntagonistaDosReceptoresDaAngiotensina"> AntagonistaDosReceptoresDaAngiotensina</label></div>
             <div class="col-xs-3 col-sm-3" style="padding-right:10px"><input type="checkbox" name="AntiInflamatoriosNaoEsteroides" id="AntiInflamatoriosNaoEsteroides" v-model="questionarioTriagem.medicamentoTriagem" value="35"> <label for="AntiInflamatoriosNaoEsteroides"> AntiInflamatoriosNaoEsteroides</label></div>
@@ -126,55 +144,55 @@
             <div class="col-xs-3 col-sm-3" style="padding-right:10px"><input type="checkbox" name="Albuterol" id="Albuterol" v-model="questionarioTriagem.medicamentoTriagem" value="41"> <label for="Albuterol"> Albuterol</label></div>
             <div class="col-xs-3 col-sm-3" style="padding-right:10px"><input type="checkbox" name="Terbutalina" id="Terbutalina" v-model="questionarioTriagem.medicamentoTriagem" value="42"> <label for="Terbutalina"> Terbutalina</label></div>
           </div>
-        
+
           <div class="row">
             <div class="col-xs-3 col-sm-3" style="padding-right:10px"><input type="checkbox" name="Angiotensina" id="Angiotensina" v-model="questionarioTriagem.medicamentoTriagem" value="43"> <label for="Angiotensina"> Angiotensina</label></div>
             <div class="col-xs-3 col-sm-3" style="padding-right:10px"></div>
             <div class="col-xs-3 col-sm-3" style="padding-right:10px"></div>
             <div class="col-xs-3 col-sm-3" style="padding-right:10px"></div>
           </div>
-        
+
             <li class="nav-item">
-            
+
               <button type="button" class="btn btn-primary" style="margin: 0 15px;" data-toggle="pill" href="#menudiabetico"> Próximo</button>
 
             </li>
         </div>
-      <div id="menudiabetico" class="container active tab-pane  "><br>
-      
+      <div id="menudiabetico" class="container tab-pane fade"><br>
+
           <div class="row">
             <div class="col-xs-3 col-sm-3" style="padding-right:10px"><h6><b-form-group :label="'Você é diabetico?'" label-for="inp-diabetico" ></b-form-group></h6></div>
             <div class="col-xs-3 col-sm-3 funkyradio" style="padding-right:10px"><input type="radio" name="diabetico" id="trueDiabetico" v-model="questionarioTriagem.diabetico" value="S"> <label for="trueDiabetico"> Sim</label><br/></div>
-            <div class="col-xs-3 col-sm-3 funkyradio" style="padding-right:10px"><input type="radio" name="diabetico" id="falseDiabetico" v-model="questionarioTriagem.diabetico" value="N"> <label for="falseDiabetico"> Não</label></div>
+            <div class="col-xs-3 col-sm-3 funkyradio" style="padding-right:10px"><input type="radio" name="diabetico" id="falseDiabetico" v-model="questionarioTriagem.diabetico" value="F"> <label for="falseDiabetico"> Não</label></div>
             <div class="col-xs-3 col-sm-3" style="padding-right:10px"></div>
           </div>
-        
+
           <div class="row">
             <div class="col-xs-3 col-sm-3" style="padding-right:10px"><h6><b-form-group :label="'Faz uso de insulina?'" label-for="inp-insulina" ></b-form-group></h6></div>
             <div class="col-xs-3 col-sm-3 funkyradio" style="padding-right:10px"><input type="radio" name="insulina" id="trueInsulina" v-model="questionarioTriagem.insulina" value="S"> <label for="trueInsulina"> Sim</label></div>
-            <div class="col-xs-3 col-sm-3 funkyradio" style="padding-right:10px"><input type="radio" name="insulina" id="falseInsulina" v-model="questionarioTriagem.insulina" value="N"> <label for="falseInsulina"> Não</label></div>
+            <div class="col-xs-3 col-sm-3 funkyradio" style="padding-right:10px"><input type="radio" name="insulina" id="falseInsulina" v-model="questionarioTriagem.insulina" value="F"> <label for="falseInsulina"> Não</label></div>
             <div class="col-xs-3 col-sm-3" style="padding-right:10px"></div>
           </div>
-          
+
           <div class="row">
             <div class="col-xs-3 col-sm-3" style="padding-right:10px"><h6><b-form-group :label="'Você consumiu álcool?'" label-for="inp-diabetico" ></b-form-group></h6></div>
             <div class="col-xs-3 col-sm-3 funkyradio" style="padding-right:10px"><input type="radio" name="alcool" id="truealcool" v-model="questionarioTriagem.alcool" value="S"> <label for="truealcool"> Sim</label></div>
-            <div class="col-xs-3 col-sm-3 funkyradio" style="padding-right:10px"><input type="radio" name="alcool" id="falsealcool" v-model="questionarioTriagem.alcool" value="N"> <label for="falsealcool"> Não</label></div>
+            <div class="col-xs-3 col-sm-3 funkyradio" style="padding-right:10px"><input type="radio" name="alcool" id="falsealcool" v-model="questionarioTriagem.alcool" value="F"> <label for="falsealcool"> Não</label></div>
             <div class="col-xs-3 col-sm-3" style="padding-right:10px"></div>
           </div>
             <li class="nav-item">
-             
+
               <button type="button" class="btn btn-primary" style="margin: 0 15px;" data-toggle="pill" href="#menuglicemiaEpotassio"> Próximo</button>
 
             </li>
         </div>
-        
+
       <div id="menuglicemiaEpotassio" class="container tab-pane fade"><br>
-      
+
           <div class="row">
             <div class="col-xs-3 col-sm-3" style="padding-right:10px"><h6><b-form-group :label="'Você tem como medir a sua glicemia?'" label-for="inp-diabetico" ></b-form-group></h6></div>
             <div class="col-xs-3 col-sm-3 funkyradio" style="padding-right:10px"><input type="radio" name="medirGlicemia" id="trueMedirGlicemia" v-model="questionarioTriagem.medirGlicemia" value="S"> <label for="trueMedirGlicemia"> Sim</label></div>
-            <div class="col-xs-3 col-sm-3 funkyradio" style="padding-right:10px"><input type="radio" name="medirGlicemia" id="falseMedirGlicemia" v-model="questionarioTriagem.medirGlicemia" value="N"> <label for="falseMedirGlicemia"> Não</label></div>
+            <div class="col-xs-3 col-sm-3 funkyradio" style="padding-right:10px"><input type="radio" name="medirGlicemia" id="falseMedirGlicemia" v-model="questionarioTriagem.medirGlicemia" value="F"> <label for="falseMedirGlicemia"> Não</label></div>
             <div class="col-xs-3 col-sm-3" style="padding-right:10px"></div>
           </div>
         <div v-if="questionarioTriagem.medirGlicemia == 'S'">
@@ -186,10 +204,10 @@
           <div class="row">
             <div class="col-xs-3 col-sm-3" style="padding-right:10px"><h6><b-form-group :label="'Você tem como medir seu potassio?'" label-for="inp-potassio" ></b-form-group></h6></div>
             <div class="col-xs-3 col-sm-3 funkyradio" style="padding-right:10px"><input type="radio" name="potassio" id="truePotassio" v-model="questionarioTriagem.potassio" value="S"> <label for="truePotassio"> Sim</label></div>
-            <div class="col-xs-3 col-sm-3 funkyradio" style="padding-right:10px"><input type="radio" name="potassio" id="falsePotassio" v-model="questionarioTriagem.potassio" value="N"> <label for="falsePotassio"> Não</label></div>
+            <div class="col-xs-3 col-sm-3 funkyradio" style="padding-right:10px"><input type="radio" name="potassio" id="falsePotassio" v-model="questionarioTriagem.potassio" value="F"> <label for="falsePotassio"> Não</label></div>
             <div class="col-xs-3 col-sm-3" style="padding-right:10px"></div>
           </div>
-          
+
         <div v-if="questionarioTriagem.potassio == 'S'">
           <div class="row">
             <div class="col-xs-3 col-sm-3" style="padding-right:10px"><h6><b-form-group :label="'Qual o resultado do potassio?'" label-for="inp-resultadopotassio" ></b-form-group></h6></div>
@@ -197,23 +215,22 @@
           </div>
         </div>
             <li class="nav-item">
-              
-               <button type="submit" class="btn btn-primary" style="margin: 0 15px;"> Enviar</button>
-          
+
+               <button type="submit" class="btn btn-primary" style="margin: 0 15px;"> Finalizar</button>
+
             </li>
         </div>
     </div>
   </ul>
   </form>
 </div>
-   
+
 
   </BaseLayout>
 </template>
 
 <script>
 import QuestionarioTriagem from '../services/questionarioTriagem'
-// @ is an alias to /src
 import BaseLayout from '@/components/BaseLayout.vue';
 import BaseLayoutQuest from '@/components/BaseLayoutQuest.vue';
 import BaseContentTitle from '@/components/BaseContentTitle.vue';
@@ -230,52 +247,33 @@ export default {
   },
   data() {
     return {
-         questionarioTriagem:{
-          id: '',
-           diabetico: '', 
-             insulina: '', 
-             medirGlicemia: '',   
+        showDismissibleAlert: false,
+        msgAlert: '',
+        questionarioTriagem:{
+             id: '',
+             diabetico: '',
+             insulina: '',
+             medirGlicemia: '',
              resultadoGlicemia: '',
              potassio: '',
              resultadopotassio: '',
-             alcool: '',            
+             alcool: '',
              sintomaTriagem: [],
              medicamentoTriagem: []
          },
          questionariosTriagem: [],
 
-
-    fields: [
-        {
-          key: 'nome',
-          sortable: true
-        },
-        {
-          key: 'data_cadastro',
-          sortable: true
-        }
-      ],
-      items: [
-        { nome: 'Insulina', data_cadastro: '03/04/2019' },
-        { nome: 'Dorflex', data_cadastro: '03/04/2019' },
-        { nome: 'Dipirona', data_cadastro: '03/04/2019' },
-        { nome: 'Paracetamol', data_cadastro: '03/04/2019' }
-      ],
-      form: {
-        nome: '',
-        hora: '',
-        data_inicial: '',
-        data_final: '',
-        quantidade_diaria: 0,
-        total_medicamento: 0,
-        frequencia: 1,
-        tipo: '',
-        status: '',
-        data_cadastro: '03/04/2019'
-      }
     };
   },
   methods: {
+      showModal() {
+          this.$refs['modal-resultado'].show();
+      },
+      hideModal() {
+          this.$refs['modal-resultado'].hide();
+          window.location.reload();
+      },
+
     listar(){
       QuestionarioTriagem.listar().then(resposta => {
           this.questionariosTriagem = resposta.data
@@ -283,16 +281,18 @@ export default {
     },
 
     salvar(){
+        this.msgAlert = '';
+        this.showDismissibleAlert = false;
 
       if (!this.questionarioTriagem.id){
           QuestionarioTriagem.salvar(this.questionarioTriagem).then(resposta => {
-            this.questionarioTriagem = {}
-            alert('Salvo com sucesso!')
-            window.location.reload();
-            this.listar()
-            this.errors = []
+
+            this.msgAlert = resposta.data;
+            this.showModal();
           }).catch(e => {
             this.errors = e.response.data.errors
+              this.msgAlert = '';
+              this.showDismissibleAlert = false
           })
       }else{
           QuestionarioTriagem.salvar(this.questionarioTriagem).then(resposta => {
@@ -320,37 +320,6 @@ export default {
           this.errors = e.response.data.errors
         })
       }
-    },
-
-    checkFormValidity() {
-      const valid = this.$refs.form.checkValidity();
-      return valid;
-    },
-    resetModal() {
-      this.form.nome = '';
-      this.form.data_inicial = '';
-      this.form.data_final = '';
-      this.form.hora = '';
-      this.form.tipo = '';
-      this.form.quantidade_diaria = 0;
-      this.form.total_medicamento = 0;
-      this.form.frequencia = 1;
-    },
-    handleSave(evt) {
-      evt.preventDefault();
-      this.handleSubmit();
-    },
-    handleSubmit() {
-      if (!this.checkFormValidity()) {
-        return;
-      }
-      this.items.push({
-        nome: this.form.nome,
-        data_cadastro: this.form.data_cadastro
-      });
-      this.$nextTick(() => {
-        this.$refs.modal.hide();
-      });
     }
   }
 };

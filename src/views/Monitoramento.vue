@@ -4,13 +4,6 @@
     <BaseContentTitle icon="stethoscope">
       Monitoramento
       <template v-slot:toolbar>
-     <!--  <b-button
-          v-b-modal="'modal-analise'"
-          size="sm"
-          variant="outline-secondary"
-        >
-          Realizar nova análise
-        </b-button> -->
       </template>
     </BaseContentTitle>
     <b-alert v-model="showDismissibleAlert" dismissible
@@ -95,7 +88,7 @@ import BaseContentTitle from '@/components/BaseContentTitle.vue';
 import DashboardCard from '@/components/DashboardCard.vue';
 import Exame from '../services/exame';
 import Analise from '../services/monitoramento';
-import QuestionarioCovid from '../services/questionarioCovid';
+//import QuestionarioCovid from '../services/questionarioCovid';
 
 export default {
 
@@ -148,27 +141,6 @@ export default {
     salvar() {
 
 
-      // if (!this.exame.id) {
-      //   Exame.salvar(this.exame).then(resposta => {
-      //     this.exame = {};
-      //     alert('Salvo com sucesso!');
-      //     window.location.reload();
-      //     this.listar();
-      //     this.errors = [];
-      //   }).catch(e => {
-      //     this.errors = e.response.data.errors;
-      //   });
-      // } else {
-      //   Exame.salvar(this.exame).then(resposta => {
-      //     this.exame = {};
-      //     alert('Atualizado com sucesso!');
-      //     window.location.reload();
-      //     this.listar();
-      //     this.errors = [];
-      //   }).catch(e => {
-      //     this.errors = e.response.data.errors;
-      //   });
-      // }
     },
 
     editar(exame) {

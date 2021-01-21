@@ -6,13 +6,14 @@ import Alergias from './views/Alergias.vue';
 import Exames from './views/Exames.vue';
 import Classificacao from './views/Classificacao.vue';
 import Monitoramento from './views/Monitoramento.vue';
-import QuestionarioTriagem from './views/QuestionarioTriagem.vue';
 import CadastroExames from './views/CadastroExames.vue';
 import Historico from './views/Historico.vue';
 import Auth from './views/Auth.vue';
 import Register from './views/Register.vue';
-import MonitoramentoDiabetes from './views/MonitoramentoDiabetes.vue';
+//import MonitoramentoDiabetes from './views/MonitoramentoDiabetes.vue';
 import auth from './middlewares/auth';
+import QuestionarioTriagem from './views/QuestionarioTriagem.vue';
+
 
 Vue.use(Router);
 
@@ -91,7 +92,18 @@ const router = new Router({
       meta: {
         middleware: [auth]
       }
+    },      
+    {
+      path: '/questionarioTriagem',
+      name: 'questionarioTriagem',
+      component: QuestionarioTriagem,
+      meta: {
+        middleware: [auth]
+      }
     },
+
+
+  /*
     {
       path: '/monitoramentoDiabetes',
       name: 'monitoramentoDiabetes',
@@ -99,19 +111,11 @@ const router = new Router({
       meta: {
         middleware: [auth]
       }
-    },
+    },*/
     {
       path: '/classificacao',
       name: 'classificacao',
       component: Classificacao,
-      meta: {
-        middleware: [auth]
-      }
-    },
-    {
-      path: '/questionarioTriagem',
-      name: 'questionarioTriagem',
-      component: QuestionarioTriagem,
       meta: {
         middleware: [auth]
       }

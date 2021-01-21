@@ -171,9 +171,10 @@
                 /><path d="M23 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></svg>
                 Monitoramento
               </b-nav-item>
-
+             
+             
               <b-nav-item
-                :active="activemenu == 7"
+                :active="activemenu == 8"
                 @click="$router.push({ name:'questionarioTriagem' })"
               >
                 <svg
@@ -186,31 +187,15 @@
                   stroke-width="2"
                   stroke-linecap="round"
                   stroke-linejoin="round"
-                  class="feather feather-users"
+                  class="feather feather-layers"
                 ><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle
                   cx="9"
                   cy="7"
                   r="4"
                 /><path d="M23 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></svg>
-                Triagem
+                Triagem 
               </b-nav-item>
-             
             </ul>
-<!--
-            <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-              <span>Médico responsável</span>
-            </h6>
-
-            <ul class="nav flex-column mb-2">
-              <li class="nav-item">
-                <span
-                  target="_self"
-                  class="nav-link"
-                >
-                  {{ doctor }}
-                </span>
-              </li>
-            </ul> -->
           </div>
         </b-nav>
 

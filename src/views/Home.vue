@@ -1,17 +1,5 @@
 <template>
   <BaseLayout activemenu="">
-   <!--  <BaseContentTitle icon="clipboard-list">
-    
-      <template v-slot:toolbar>
-       <b-button
-          v-b-modal="'modal-analise'"
-          size="sm"
-          variant="outline-secondary"
-        >
-          Realizar nova análise 
-        </b-button>
-      </template>
-    </BaseContentTitle>-->
     <b-alert v-model="showDismissibleAlert" dismissible
              @dismissed="msgAlert = ''">
       {{msgAlert}}
@@ -22,31 +10,19 @@
 
     <b-row>
       <DashboardCard
-        title="Creatinina"
+        title="Creatinine"
         v-bind:success="examesCadastrados.creatinina"
       />
-      <DashboardCard
+  <!--    <DashboardCard
         title="Ureia"
         v-bind:success="examesCadastrados.ureia"
-      />
-<!--      <DashboardCard-->
-<!--        title="Albumina"-->
-<!--        v-bind:success="examesCadastrados.albumina"-->
-<!--      />-->
-<!--      <DashboardCard-->
-<!--        title="Potássio"-->
-<!--        v-bind:success="examesCadastrados.potassio"-->
-<!--      />-->
+      /> -->
       <DashboardCard
-        title="Microalbuminúria"
+        title="Albuminúria"
         v-bind:success="examesCadastrados.microalbuminuria"
       />
-<!--      <DashboardCard-->
-<!--        title="Albuminúria"-->
-<!--        v-bind:success="examesCadastrados.albuminuria"-->
-<!--      />-->
       <DashboardCard
-        title="Taxa de Filtração Glomerular (TFG)"
+        title="Glomerular Filtration Rate(GFR)"
         v-bind:success="examesCadastrados.tfg"
       />
     </b-row>
@@ -81,8 +57,6 @@ import BaseContentTitle from '@/components/BaseContentTitle.vue';
 import DashboardCard from '@/components/DashboardCard.vue';
 import Exame from '../services/exame';
 import Analise from '../services/analise';
-import QuestionarioCovid from '../services/questionarioCovid';
-
 export default {
 
   name: 'Home',

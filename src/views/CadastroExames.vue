@@ -8,14 +8,6 @@
       </template>
     </BaseContentTitle>
 
-  <!--  <b-modal
-      id="modal-adicionar-exame"
-      ref="modal"
-      size="md"
-      title="Exame"
-      @show="resetModal"
-      @ok="handleSave"
-    > -->
       <form
         ref="form"
         @submit.prevent="salvar"

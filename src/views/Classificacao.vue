@@ -3,14 +3,7 @@
     <BaseContentTitle icon="notes-medical">
       Classificação de Risco
       <template v-slot:toolbar>
-<!--        <b-button-->
-<!--          v-b-modal="'modal-adicionar-classificacao'"-->
-<!--          size="sm"-->
-<!--          variant="outline-secondary"-->
-<!--        >-->
-<!--          <font-awesome-icon icon="plus" /> Adicionar Classificação-->
-<!--        </b-button>-->
-      </template>
+     </template>
     </BaseContentTitle>
 
     <div class="table-responsive">
