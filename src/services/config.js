@@ -5,8 +5,8 @@ export const http = getAxios();
 
 function getAxios() {
   let instance = axios.create({
-    //baseURL: 'http://localhost:8081/api/'
-    baseURL: 'https://multcarepaciente-triagem-back.herokuapp.com/api/'
+    baseURL: 'http://localhost:8081/api/'
+    //baseURL: 'https://multcarepaciente-triagem-back.herokuapp.com/api/'
   });
 
   instance.interceptors.request.use(config => {

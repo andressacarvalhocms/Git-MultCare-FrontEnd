@@ -1,5 +1,5 @@
 <template>
-  <BaseLayout activemenu="">
+  <BaseLayout activemenu="1">
     <b-alert v-model="showDismissibleAlert" dismissible
              @dismissed="msgAlert = ''">
       {{msgAlert}}

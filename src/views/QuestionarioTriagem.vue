@@ -1,6 +1,6 @@
 
 <template>
-  <BaseLayout activemenu="3">
+  <BaseLayout activemenu="7">
  <br>
 
     <b-modal ref="modal-resultado" hide-footer centered title="Resultado da Classificação."

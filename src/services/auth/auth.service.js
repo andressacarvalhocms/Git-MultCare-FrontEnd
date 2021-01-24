@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-//const API_URL = 'http://localhost:8081/api/';
-const API_URL = 'https://multcarepaciente-triagem-back.herokuapp.com/api/';
+const API_URL = 'http://localhost:8081/api/';
+//const API_URL = 'https://multcarepaciente-triagem-back.herokuapp.com/api/';
 
 class AuthService {
   login(user) {

@@ -1,6 +1,6 @@
 
 <template>
-  <BaseLayout activemenu="4">
+  <BaseLayout activemenu="6">
     <BaseContentTitle icon="stethoscope">
       Monitoramento
       <template v-slot:toolbar>

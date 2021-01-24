@@ -124,6 +124,8 @@
                 /><path d="M23 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></svg>
                 Exames
               </b-nav-item>
+
+              
               <b-nav-item
                 :active="activemenu == 5"
                 @click="$router.push({ name:'classificacao' })"
@@ -174,7 +176,7 @@
              
              
               <b-nav-item
-                :active="activemenu == 8"
+                :active="activemenu == 7"
                 @click="$router.push({ name:'questionarioTriagem' })"
               >
                 <svg

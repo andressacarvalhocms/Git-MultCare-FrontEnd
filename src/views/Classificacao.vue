@@ -1,5 +1,5 @@
 <template>
-  <BaseLayout activemenu="3">
+  <BaseLayout activemenu="5">
     <BaseContentTitle icon="notes-medical">
       Classificação de Risco
       <template v-slot:toolbar>
@@ -168,14 +168,14 @@ export default {
           key: 'creatinina',
           sortable: true
         },
-        {
+   /*     {
           key: 'ureia',
           sortable: true
-        },
+        }, */
         {
-          key: 'microalbuminaria',
+          key: 'Albuminuria',
           sortable: true
-        },
+        }, /*
         {
           key: 'idade',
           sortable: true
@@ -183,7 +183,7 @@ export default {
         {
           key: 'sexo',
           sortable: true
-        },
+        }, */
         {
           key: 'tfg',
           sortable: true
